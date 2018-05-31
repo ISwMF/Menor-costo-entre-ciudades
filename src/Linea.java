@@ -11,7 +11,10 @@ public class Linea {
         this.Recorrido = Recorrido;
         this.Valor = Valor;
         this.Mejor = Mejor;
-
+    }
+    
+    public void imprimir(){
+        System.out.println("Numero: " + Nodo + ", || Valor: " + Valor + ", || Mejor: " + Mejor + ", || Recorrido: " + Recorrido);
     }
 
 }

@@ -15,23 +15,36 @@ public class Mostrador extends JFrame {
 
     public Mostrador(int numerodeciudades) {
         this.numerodeciudades = numerodeciudades;
-        JPanel PanelMatriz = new JPanel(new GridLayout(numerodeciudades, numerodeciudades));
+        JPanel PanelMatriz = new JPanel(new GridLayout((numerodeciudades + 1), (numerodeciudades + 1)));
         JPanel PanelBoton = new JPanel(new GridLayout(1, 0));
         JPanel PanelSelCiud = new JPanel(new GridLayout(0, 2));
         JPanel PanelTodo = new JPanel();
         PanelTodo.setLayout(new BoxLayout(PanelTodo, BoxLayout.PAGE_AXIS));
         JTextField[] valores = new JTextField[numerodeciudades * numerodeciudades];
-        int j = 0;
-        for (int i = 0; i < numerodeciudades * numerodeciudades; i++) {
-            if (i == j) {
-                valores[i] = new JTextField("inf");
-                valores[i].setEditable(false);
-                PanelMatriz.add(valores[i]);
-                j = j + numerodeciudades + 1;
+        for (int i = 0; i <= numerodeciudades; i++) {
+            if (i == 0) {
+                PanelMatriz.add(new JLabel("C/C"));
             } else {
-                valores[i] = new JTextField();
-                PanelMatriz.add(valores[i]);
-
+                PanelMatriz.add(new JLabel(String.valueOf(i)));
+            }
+        }
+        int j = 0;
+        int contador = 0;
+        int cabajo = 1;
+        for (int i = 0; i < numerodeciudades * (numerodeciudades + 1); i++) {
+            if (i % (numerodeciudades + 1) == 0) {
+                PanelMatriz.add(new JLabel(String.valueOf(cabajo)));
+                cabajo++;
+            } else if (contador == j) {
+                valores[contador] = new JTextField("inf");
+                valores[contador].setEditable(false);
+                PanelMatriz.add(valores[contador]);
+                j = j + numerodeciudades + 1;
+                contador++;
+            } else {
+                valores[contador] = new JTextField();
+                PanelMatriz.add(valores[contador]);
+                contador++;
             }
         }
         String[] ciudades = new String[numerodeciudades];
@@ -52,8 +65,8 @@ public class Mostrador extends JFrame {
                     recorrido++;
                 }
             }
-            String inicio = (String)ciudades1.getSelectedItem();
-            String fin = (String)ciudades2.getSelectedItem();
+            String inicio = (String) ciudades1.getSelectedItem();
+            String fin = (String) ciudades2.getSelectedItem();
             Dinamizador D = new Dinamizador();
             D.dinamizar(matriz, inicio, fin);
         });

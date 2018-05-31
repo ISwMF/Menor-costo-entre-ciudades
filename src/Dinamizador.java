@@ -19,7 +19,7 @@ public class Dinamizador {
                     if (i == fin) {
                         matriz[i].Recorrido = String.valueOf((i+1));
                     } else {
-                        matriz[i].Recorrido = (inicio + 1) + "->" + i + "->" + (fin + 1);
+                        matriz[i].Recorrido = (inicio + 1) + "->" + (i+1) + "->" + (fin + 1);
                     }
                 } else {
                     matriz[i].Recorrido = (inicio + 1) + "->" + (fin + 1);
@@ -32,7 +32,10 @@ public class Dinamizador {
                     matriz[i].Mejor = matriz[i].Valor;
                 }
             }
-
+            for (int i = 0; i < matriz.length; i++) {
+                matriz[i].imprimir();
+            }
+            
             double menorRecorrido = matriz[matriz.length - 1].Mejor;
             System.out.println("El menor recorrido que se puede lograr es " + menorRecorrido);
             for (int i = 0; i < matriz.length; i++) {
